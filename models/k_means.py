@@ -33,14 +33,3 @@ class KMeans:
     def upgrade_centroids(self, X, labels):
         new_centroids = [X[labels==i].mean(axis=0) for i in range(0, self.n_cluster)]
         return np.array(new_centroids, dtype=np.float32)
-
-
-def image_class(all_bovw, centers):
-    category = []
-    for img in all_bovw:
-        histogram = np.zeros(len(centers)) 
-        for each_feature in img:
-            ind = np.argmin(np.sum(np.sqrt((each_feature - centers)**2), axis=1))
-            histogram[ind] += 1
-        category.append(histogram)
-    return category
